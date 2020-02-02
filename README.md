@@ -1,4 +1,4 @@
-# whosinternetapi
+# Whosinternetapi
 
 This is a highscore server for our Global Game Jam 2020 game Who's In the Internet. Please don't worry about the commit messages as this was done as fast as possible.
 
