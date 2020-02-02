@@ -51,9 +51,9 @@ async function initDB() {
   }
 }
 
-const getScoreboard = ctx => {
+const getScoreboard = async ctx => {
   try {
-    ctx.body = ctx.db.getScoreboard();
+    ctx.body = await ctx.db.getScoreboard();
   }
   catch (e) {
     console.log(e);
@@ -61,9 +61,9 @@ const getScoreboard = ctx => {
   }
 }
 
-const addScoreboard = ctx => {
+const addScoreboard = async (ctx, name, score) => {
   try {
-    ctx.db.addScoreboard(ctx.query.name, ctx.query.score);
+    await ctx.db.addScoreboard(name, score);
     ctx.body = "success";
   }
   catch (e) {
@@ -73,7 +73,7 @@ const addScoreboard = ctx => {
 }
 
 app.use(route.get("/get_list", getScoreboard));
-app.use(route.get("/add_score", addScoreboard));
+app.use(route.get("/add_score/:name/:score", addScoreboard));
 
 app.init = async function() {
   this.context.db = await initDB();
