@@ -38,7 +38,7 @@ async function initDB() {
 
     return {
       async getScoreboard() {
-        return await db.collection('scoreboard').find({}, { projection: {_id: 0, name: 1, score: 1} }).sort({ score: -1 }).toArray();
+        return await db.collection('scoreboard').find({}, { projection: {_id: 0, name: 1, score: 1} }).sort({ score: -1 }).limit(30).toArray();
       },
       async addScoreboard(name, score) {
         return await db.collection('scoreboard').updateOne({name}, { $set: {name, score}}, { upsert: true });
@@ -63,7 +63,7 @@ const getScoreboard = async ctx => {
 
 const addScoreboard = async (ctx, name, score) => {
   try {
-    await ctx.db.addScoreboard(name, parseInt(score, 10));
+    await ctx.db.addScoreboard(name.substring(0, 3), parseInt(score, 10));
     ctx.body = "success";
   }
   catch (e) {
