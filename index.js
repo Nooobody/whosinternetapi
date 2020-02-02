@@ -63,7 +63,7 @@ const getScoreboard = async ctx => {
 
 const addScoreboard = async (ctx, name, score) => {
   try {
-    await ctx.db.addScoreboard(name, score);
+    await ctx.db.addScoreboard(name, parseInt(score, 10));
     ctx.body = "success";
   }
   catch (e) {
