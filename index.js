@@ -38,7 +38,7 @@ async function initDB() {
 
     return {
       async getScoreboard() {
-        return await db.collection('scoreboard').find({}, { _id: -1 }).sort({ score: 1 }).toArray();
+        return await db.collection('scoreboard').find({}, { _id: 0 }).sort({ score: 1 }).toArray();
       },
       async addScoreboard(name, score) {
         return await db.collection('scoreboard').updateOne({name}, { $set: {name, score}}, { upsert: true });
